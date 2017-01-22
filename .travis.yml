@@ -1,0 +1,20 @@
+language: python
+sudo: required
+services:
+- docker
+
+env:
+  global:
+  - MOUNTPOINT: mountpoint
+  matrix:
+  - NAME: ubuntu-14.04.5-server-amd64
+    ISO: http://releases.ubuntu.com/14.04.5/ubuntu-14.04.5-server-amd64.iso
+
+install:
+- apt-get update
+- apt-get install -y wget
+
+script:
+- wget "${ISO}"
+- mkdir -p "${MOUNTPOINT}"
+- mount -o loop "${ISO"} "${MOUNTPOINT}"
