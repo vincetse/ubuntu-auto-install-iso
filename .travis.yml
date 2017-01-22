@@ -17,4 +17,4 @@ install:
 script:
 - wget "${ISO}"
 - mkdir -p "${MOUNTPOINT}"
-- sudo mount -o loop "${ISO"} "${MOUNTPOINT}"
+- sudo mount -o loop "${ISO}" "${MOUNTPOINT}"
