@@ -1,5 +1,33 @@
+# You can choose one of the three predefined partitioning recipes:
+# - atomic: all files in one partition
+# - home:   separate /home partition
+# - multi:  separate /home, /usr, /var, and /tmp partitions
+d-i partman-auto/choose_recipe select atomic
+
+# If you just want to change the default filesystem from ext3 to something
+# else, you can do that without providing a full recipe.
+d-i partman/default_filesystem string ext4
+
+# This makes partman automatically partition without confirmation, provided
+# that you told it what to do using one of the methods above.
 d-i partman/confirm_write_new_label boolean true
 d-i partman/choose_partition \
 select Finish partitioning and write changes to disk
 d-i partman/confirm boolean true
-d-i partman/confirm boolean true
+d-i partman/confirm_nooverwrite boolean true
+
+# The installer will warn about weak passwords. If you are sure you know
+# what you're doing and want to override it, uncomment this.
+d-i user-setup/allow-password-weak boolean true
+
+# Controls whether or not the hardware clock is set to UTC.
+d-i clock-setup/utc boolean true
+
+# You may set this to any valid setting for $TZ; see the contents of
+# /usr/share/zoneinfo/ for valid values.
+d-i time/zone string Etc/UTC
+
+# Controls whether to use NTP to set the clock during the install
+d-i clock-setup/ntp boolean true
+# NTP server to use. The default is almost always fine here.
+d-i clock-setup/ntp-server string pool.ntp.org
