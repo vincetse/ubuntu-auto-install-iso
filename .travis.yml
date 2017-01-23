@@ -11,6 +11,8 @@ env:
   - NAME: ubuntu-14.04.5-server-amd64
     ISO: "${NAME}.iso"
     ISO_URL: "http://releases.ubuntu.com/14.04.5/${ISO}"
+    OUTPUT_VOLUME: "auto-${NAME}"
+    OUTPUT_ISO: "${OUTPUT_VOLUME}.iso"
 
 install:
 - sudo apt-get update
@@ -26,9 +28,7 @@ script:
 - sudo cp ks.preseed "${OUTPUT_DIR}"
 - sudo cp ks.cfg "${OUTPUT_DIR}"
 - sudo cp txt.cfg "${OUTPUT_DIR}/isolinux"
-- mkisofs -D -r -V "auto-${NAME}" -cache-inodes -J -l \
-    -b "${OUTPUT_DIR}/isolinux/isolinux.bin" \
-    -c "${OUTPUT_DIR}/isolinux/boot.cat" \
-    -no-emul-boot -boot-load-size 4 -boot-info-table \
-    -o "unattended-${NAME}.iso" \
+- genisoimage -v -J -r \
+    -V "${OUTPUT_VOLUME}" \
+    -o "${OUTPUT_ISO}" \
     "${OUTPUT_DIR}"
