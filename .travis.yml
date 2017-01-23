@@ -8,9 +8,10 @@ env:
   - MOUNTPOINT: mountpoint
   - OUTPUT_DIR: "ubuntuiso"
   matrix:
-  - NAME: ubuntu-14.04.5-server-amd64
+  - VERSION: "14.04.5"
+    NAME: "ubuntu-${VERSION}-server-amd64"
     ISO: "${NAME}.iso"
-    ISO_URL: "http://releases.ubuntu.com/14.04.5/${ISO}"
+    ISO_URL: "http://releases.ubuntu.com/${VERSION}/${ISO}"
     OUTPUT_VOLUME: "auto-${NAME}"
     OUTPUT_ISO: "${OUTPUT_VOLUME}.iso"
 
