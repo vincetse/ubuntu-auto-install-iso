@@ -15,11 +15,11 @@ install:
 - sudo apt-get install -y wget genisoimage
 
 script:
-- export NAME: "ubuntu-${VERSION}-server-amd64"
-- export ISO: "${NAME}.iso"
-- export ISO_URL: "http://releases.ubuntu.com/${VERSION}/${ISO}"
-- export OUTPUT_VOLUME: "auto-${NAME}"
-- export OUTPUT_ISO: "${OUTPUT_VOLUME}-${VERSION}.iso"
+- export NAME="ubuntu-${VERSION}-server-amd64"
+- export ISO="${NAME}.iso"
+- export ISO_URL="http://releases.ubuntu.com/${VERSION}/${ISO}"
+- export OUTPUT_VOLUME="auto-${NAME}"
+- export OUTPUT_ISO="${OUTPUT_VOLUME}-${VERSION}.iso"
 - wget "${ISO_URL}"
 - mkdir -p "${MOUNTPOINT}"
 - mkdir -p "${OUTPUT_DIR}"
