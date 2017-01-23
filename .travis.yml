@@ -8,22 +8,18 @@ env:
   - OUTPUT_DIR: ubuntuiso
   matrix:
   - VERSION: "14.04.5"
-    NAME: "ubuntu-${VERSION}-server-amd64"
-    ISO: "${NAME}.iso"
-    ISO_URL: "http://releases.ubuntu.com/${VERSION}/${ISO}"
-    OUTPUT_VOLUME: "auto-${NAME}"
-    OUTPUT_ISO: "${OUTPUT_VOLUME}.iso"
   - VERSION: "16.04.1"
-    NAME: "ubuntu-${VERSION}-server-amd64"
-    ISO: "${NAME}.iso"
-    ISO_URL: "http://releases.ubuntu.com/${VERSION}/${ISO}"
-    OUTPUT_VOLUME: "auto-${NAME}"
-    OUTPUT_ISO: "${OUTPUT_VOLUME}.iso"
 
 install:
 - sudo apt-get update
 - sudo apt-get install -y wget genisoimage
+
 script:
+- export NAME: "ubuntu-${VERSION}-server-amd64"
+- export ISO: "${NAME}.iso"
+- export ISO_URL: "http://releases.ubuntu.com/${VERSION}/${ISO}"
+- export OUTPUT_VOLUME: "auto-${NAME}"
+- export OUTPUT_ISO: "${OUTPUT_VOLUME}-${VERSION}.iso"
 - wget "${ISO_URL}"
 - mkdir -p "${MOUNTPOINT}"
 - mkdir -p "${OUTPUT_DIR}"
