@@ -26,3 +26,9 @@ script:
 - sudo cp ks.preseed "${OUTPUT_DIR}"
 - sudo cp ks.cfg "${OUTPUT_DIR}"
 - sudo cp txt.cfg "${OUTPUT_DIR}/isolinux"
+- mkisofs -D -r -V "unattended-${NAME}" -cache-inodes -J -l \
+    -b "${OUTPUT_DIR}/isolinux/isolinux.bin" \
+    -c "${OUTPUT_DIR}/isolinux/boot.cat" \
+    -no-emul-boot -boot-load-size 4 -boot-info-table \
+    -o "unattended-${NAME}.iso" \
+    "${OUTPUT_DIR}"
