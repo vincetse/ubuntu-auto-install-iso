@@ -19,7 +19,7 @@ script:
 - export ISO="${NAME}.iso"
 - export ISO_URL="http://releases.ubuntu.com/${VERSION}/${ISO}"
 - export OUTPUT_VOLUME="auto-${NAME}"
-- export OUTPUT_ISO="${OUTPUT_VOLUME}-${VERSION}.iso"
+- export OUTPUT_ISO="${OUTPUT_VOLUME}.iso"
 - wget "${ISO_URL}"
 - mkdir -p "${MOUNTPOINT}"
 - mkdir -p "${OUTPUT_DIR}"
