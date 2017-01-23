@@ -2,11 +2,10 @@ language: python
 sudo: required
 services:
 - docker
-
 env:
   global:
   - MOUNTPOINT: mountpoint
-  - OUTPUT_DIR: "ubuntuiso"
+  - OUTPUT_DIR: ubuntuiso
   matrix:
   - VERSION: "14.04.5"
     NAME: "ubuntu-${VERSION}-server-amd64"
@@ -24,7 +23,6 @@ env:
 install:
 - sudo apt-get update
 - sudo apt-get install -y wget genisoimage
-
 script:
 - wget "${ISO_URL}"
 - mkdir -p "${MOUNTPOINT}"
@@ -36,3 +34,12 @@ script:
 - sudo cp ks.cfg "${OUTPUT_DIR}"
 - sudo cp txt.cfg "${OUTPUT_DIR}/isolinux"
 - genisoimage -v -J -r  -V "${OUTPUT_VOLUME}" -o "${OUTPUT_ISO}" "${OUTPUT_DIR}"
+
+deploy:
+  provider: releases
+  api_key:
+    secure: mcSMGNcnXX2nAJz1fQjQkcopCfT9nqwC5jlvl5cCFmuxs+JksdTj8QI2o8h4/jt/7+rtxbThu6gqKIZ1Y+Naww8HrqGS2WAmosEKFsduydL/O8ZrQhts0mdc8cgQu9TJM2bghFyfe8S78XZFQrGHTP3nES9IS3XYiFzy7Zk8d/V6NH/XACZakfLlm2CZNMGP+dfdSgNmbizEFqtMoZ6lfRQ6Dq/xV6vwnW6JdfrJxU7bIqoOkAeJQWpaxyxxTClf37rx6si3TP+rvZ3IzQCQSuJKhM3urSJdCnTgHzx46Q7/bmFXip/pUYMICWKADKX0JiZpxfAFQVQh2HRs82g69GBCJYvVBAK1MnNSaE4n8+/dITwHDc5/aojC3W8XtnmG7zvha7R7zLnvCgyFgvUeheBBvOfiohV52T9/Y6jGXuLKAZ8RYUwtWFlEwoP1cNnJQR8+qCXCjnGJlMKWvEbKe7droh3jsfjQp2XeC9P4wnlCL12/9dMMbhrMRAENqzK5FKYeaYu9zik1M5npXARsJjdtWaf2s/LmUoSnNXD0zglU3EN2fkWE6n+IPXXCgqIhuCb3FZBCTsikrfGtibw4/IRxVSO1B//uYQEJQaLkOiE+S6B6qPEBNCet3Wg8Dq5DwhqcIEqRRstDlEEqEdmzBwkUdnaW8OTmKjpx4mu2dKA=
+  file: "${OUTPUT_ISO}"
+  skip_cleanup: true
+  on:
+    tags: true
