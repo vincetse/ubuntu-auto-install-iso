@@ -19,7 +19,7 @@ script:
 - export ISO="${NAME}.iso"
 - export ISO_URL="http://releases.ubuntu.com/${VERSION}/${ISO}"
 - export OUTPUT_VOLUME="auto-${NAME}"
-- export OUTPUT_ISO="${OUTPUT_VOLUME}.iso"
+- export OUTPUT_ISO="unattended-${NAME}.iso"
 - wget "${ISO_URL}"
 - mkdir -p "${MOUNTPOINT}"
 - mkdir -p "${OUTPUT_DIR}"
@@ -29,7 +29,7 @@ script:
 - sudo cp ks.preseed "${OUTPUT_DIR}"
 - sudo cp ks.cfg "${OUTPUT_DIR}"
 - sudo cp txt.cfg "${OUTPUT_DIR}/isolinux"
-- genisoimage -v -J -r  -V "${OUTPUT_VOLUME}" -o "${OUTPUT_ISO}" "${OUTPUT_DIR}"
+- genisoimage -v -J -r -V "${OUTPUT_VOLUME}" -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot boot-load-size 4 -boot-info-table -o "${OUTPUT_ISO}" "${OUTPUT_DIR}"
 
 deploy:
   provider: releases
