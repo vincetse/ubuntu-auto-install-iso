@@ -25,7 +25,6 @@ script:
 - sudo mkdir -p "${OUTPUT_DIR}"
 - sudo mount -o loop "${ISO}" "${MOUNTPOINT}"
 - sudo cp -rT "${MOUNTPOINT}" "${OUTPUT_DIR}"
-- sudo cp lang "${OUTPUT_DIR}/isolinux/lang"
 - sudo cp ks.preseed "${OUTPUT_DIR}"
 - sudo cp ks.cfg "${OUTPUT_DIR}"
 - sudo cp txt.cfg "${OUTPUT_DIR}/isolinux"
