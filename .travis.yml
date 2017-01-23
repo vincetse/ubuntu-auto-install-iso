@@ -24,12 +24,13 @@ script:
 - mkdir -p "${MOUNTPOINT}"
 - mkdir -p "${OUTPUT_DIR}"
 - sudo mount -o loop "${ISO}" "${MOUNTPOINT}"
-- cp -rT "${MOUNTPOINT}" "${OUTPUT_DIR}"
+- sudo cp -rT "${MOUNTPOINT}" "${OUTPUT_DIR}"
 - sudo cp lang "${OUTPUT_DIR}/isolinux/lang"
 - sudo cp ks.preseed "${OUTPUT_DIR}"
 - sudo cp ks.cfg "${OUTPUT_DIR}"
 - sudo cp txt.cfg "${OUTPUT_DIR}/isolinux"
-- genisoimage -v -J -r -V "${OUTPUT_VOLUME}" -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o "${OUTPUT_ISO}" "${OUTPUT_DIR}"
+- sudo genisoimage -v -J -r -V "${OUTPUT_VOLUME}" -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o "${OUTPUT_ISO}" "${OUTPUT_DIR}"
+- sudo chmod go+r "${OUTPUT_ISO}"
 
 deploy:
   provider: releases
