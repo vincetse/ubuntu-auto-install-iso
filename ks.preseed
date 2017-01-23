@@ -50,5 +50,3 @@ d-i clock-setup/ntp-server string pool.ntp.org
 # directly, or use the apt-install and in-target commands to easily install
 # packages and run commands in the target system.
 #d-i preseed/late_command string apt-install zsh; in-target chsh -s /bin/zsh
-d-i preseed/late_command string \
-  mkdir -p /home/vagrant/.ssh; wget –no-check-certificate https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub -O /home/vagrant/.ssh/authorized_keys; chmod 0700 /home/vagrant/.ssh; chmod 0600 /home/vagrant/.ssh/authorized_keys; chown -R vagrant:vagrant /home/vagrant/.ssh; echo "vagrant ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/vagrant
