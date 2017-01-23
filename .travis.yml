@@ -14,6 +14,12 @@ env:
     ISO_URL: "http://releases.ubuntu.com/${VERSION}/${ISO}"
     OUTPUT_VOLUME: "auto-${NAME}"
     OUTPUT_ISO: "${OUTPUT_VOLUME}.iso"
+  - VERSION: "16.04.1"
+    NAME: "ubuntu-${VERSION}-server-amd64"
+    ISO: "${NAME}.iso"
+    ISO_URL: "http://releases.ubuntu.com/${VERSION}/${ISO}"
+    OUTPUT_VOLUME: "auto-${NAME}"
+    OUTPUT_ISO: "${OUTPUT_VOLUME}.iso"
 
 install:
 - sudo apt-get update
