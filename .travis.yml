@@ -28,7 +28,4 @@ script:
 - sudo cp ks.preseed "${OUTPUT_DIR}"
 - sudo cp ks.cfg "${OUTPUT_DIR}"
 - sudo cp txt.cfg "${OUTPUT_DIR}/isolinux"
-- genisoimage -v -J -r \
-    -V "${OUTPUT_VOLUME}" \
-    -o "${OUTPUT_ISO}" \
-    "${OUTPUT_DIR}"
+- genisoimage -v -J -r  -V "${OUTPUT_VOLUME}" -o "${OUTPUT_ISO}" "${OUTPUT_DIR}"
